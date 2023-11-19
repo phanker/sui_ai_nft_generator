@@ -1,0 +1,6 @@
+{
+  "PACKAGE_ID": "0x450cdf2015c6784d59b2f69d836556f514a3fde4d302d917eff1e48a1c81ddf2",
+  "MODULE_NAME": "customized_nft",
+  "MINT_FUNCTION": "mint_to_sender"
+}
+
