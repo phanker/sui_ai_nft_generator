@@ -44,8 +44,8 @@ Created Objects:
   Mutated Objects:
 - ID: 0x6eba3e64d49bf2c4e5861d60fbdabd569848db18e9cc43336fb41c967ef2b8e1 , Owner: Account Address ( 0x5cca2192331ca9db87a6adfc756f809150aad3f8a2bf7eb3b68dd46ea03989f7 )
 ```
-### 4.Configurate 'package_id' in './constants/NFT.json' file
-- **PACKAGE_ID=""**
+### 5.Configurate 'package_id' in './constants/NFT.json' file
+- **PACKAGE_ID="your_package_id"**
 
-### 5. Start frontend
+### 6. Start frontend
 `$ npm run start`
