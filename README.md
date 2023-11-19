@@ -29,8 +29,8 @@ You'll also need to create an account on [NFT.Storage](https://nft.storage/), an
 
 ### 4.Deploy NFT contract
 In a separate terminal execute:  
-`$ cd cd contract/nft/    
- $ sui client publish --gas-budget 100000000`  
+`$ cd cd contract/nft/`      
+`$ sui client publish --gas-budget 100000000`  
 Get the 'package_id' of contract from the log of deployment:
 You'll find the "Transaction Effects" log below,the named 'ID' and 'Owner: Immutable' just is 'package_id' 
 ```
