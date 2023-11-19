@@ -1,13 +1,13 @@
-
 import Spinner from "react-bootstrap/Spinner";
 import {useState, useEffect} from 'react';
 import {NFTStorage, File} from 'nft.storage'
 import {Buffer} from 'buffer';
 import axios from 'axios';
-import { useCurrentAccount, useSuiClientQuery } from '@mysten/dapp-kit';
-import { useSignAndExecuteTransactionBlock } from "@mysten/dapp-kit";
-import { TransactionBlock } from "@mysten/sui.js/transactions";
+import {useCurrentAccount, useSuiClientQuery} from '@mysten/dapp-kit';
+import {useSignAndExecuteTransactionBlock} from "@mysten/dapp-kit";
+import {TransactionBlock} from "@mysten/sui.js/transactions";
 import NFT from "../constants/NFT.json";
+
 const CreateNft = () => {
 
 
@@ -18,27 +18,12 @@ const CreateNft = () => {
 
     const [message, setMessage] = useState("")
     const [isWaiting, setIsWaiting] = useState(false)
-    const currentAccount  = useCurrentAccount();
-    const { mutate: signAndExecute } = useSignAndExecuteTransactionBlock();
+    const currentAccount = useCurrentAccount();
+    const {mutate: signAndExecute} = useSignAndExecuteTransactionBlock();
     const submitHandler = async (e) => {
         e.preventDefault()
-        console.log(currentAccount)
-        /**
-         *
-         *
-         * {
-         *     "address": "0x2f67c731ca840283e2221f47c3144df118f5567917a6c8abe7694015a54348bb",
-         *     "chains": [
-         *         "sui:mainnet"
-         *     ],
-         *     "features": [
-         *         "standard:connect",
-         *         "standard:events",
-         *         "sui:signAndExecuteTransaction"
-         *     ]
-         * }
-         */
-        if(!currentAccount){
+        console.log('current user :', {currentAccount});
+        if (!currentAccount) {
             window.alert("Please connect your wallet!")
             return
         }
@@ -100,31 +85,23 @@ const CreateNft = () => {
         const nftstorage = new NFTStorage({token: process.env.REACT_APP_NFT_STORAGE_API_KEY})
 
         // Send request to store image
-        const {ipnft,url,data} = await nftstorage.store({
+        const {data} = await nftstorage.store({
             image: new File([imageData], "image.jpeg", {type: "image/jpeg"}),
             name: name,
             description: description,
         })
-        console.log(data)
-        console.log(data.image.pathname)
-        // Save the URL
-        const matedata_url = `https://ipfs.io/ipfs/${ipnft}/metadata.json`
-        const path_url =data.image.pathname.replace("//","");
+        const path_url = data.image.pathname.replace("//", "");
         const images_url = `https://ipfs.io/ipfs/${path_url}`
         console.log(images_url)
-        // https://ipfs.io/ipfs/bafybeiflhhk2xx5autae7ibc3y3ugfsa6pzylushm4ugwj77totb4p6224/image.jpeg
-        setURL(images_url)
-
-        return matedata_url
+        return images_url
     }
 
-    const mintImage = async (tokenURI) => {
+    const mintImage = async (nftImageUrl) => {
         setMessage("Waiting for Mint...")
-
 
         const txb = new TransactionBlock();
         txb.moveCall({
-            arguments: [txb.pure(name), txb.pure(description), txb.pure(url)] ,
+            arguments: [txb.pure(name), txb.pure(description), txb.pure(nftImageUrl)],
             target: `${NFT.PACKAGE_ID}::${NFT.MODULE_NAME}::${NFT.MINT_FUNCTION}`,
         });
 
@@ -141,19 +118,16 @@ const CreateNft = () => {
                     console.log("onSuccess ...");
                     // The first created object in this TransactionBlock should be the new Counter
                     const objectId = tx.effects?.created?.[0]?.reference?.objectId;
+                    console.log(objectId);
                     if (objectId) {
-                        console.log(objectId);
-                        // props.onCreated(objectId);
+                        setURL(`https://suiexplorer.com/object/${objectId}?network=devnet`)
                     }
                 },
             },
         )
 
 
-
-
     }
-
 
 
     return (
@@ -182,7 +156,7 @@ const CreateNft = () => {
             </div>
             {!isWaiting && url && (
                 <p>
-                    View&nbsp;<a href={url} target="_blank" rel="noreferrer">Metadata</a>
+                    View&nbsp;<a href={url} target="_blank" rel="noreferrer">NFT Metadata</a>
                 </p>
             )}
         </div>

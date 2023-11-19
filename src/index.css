@@ -25,16 +25,25 @@ body {
 
 nav {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   align-items: center;
+  padding: 20px; /* 添加内边距，使内容离边框有一定距离 */
 }
+
+
+/*.nav__brand {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+
+/*  padding: 20px;*/
+/*}*/
 
 .nav__brand {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* 或者使用 flex-start，根据实际需要 */
   align-items: center;
-
   padding: 20px;
+  width: 100%; /* 让 .nav__brand 撑满整个宽度 */
 }
 
 .nav__brand h1 {

@@ -1,5 +1,5 @@
 // import { ethers } from 'ethers';
-import { ConnectButton } from '@mysten/dapp-kit';
+import {ConnectButton} from '@mysten/dapp-kit';
 
 
 const Navigation = () => {
@@ -7,11 +7,13 @@ const Navigation = () => {
 
     return (
         <nav>
-            <div className="nav__brand App">
+            <div className="nav__brand ">
                 <h1>AI NFT Generator</h1>
-                <header className="App-header">
-                    <ConnectButton />
+                <div>
+                <header className=" App-header App ">
+                        <ConnectButton/>
                 </header>
+                </div>
             </div>
         </nav>
     );
