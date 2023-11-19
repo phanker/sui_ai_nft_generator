@@ -28,11 +28,12 @@ You'll need to create an account on [Hugging Face](https://huggingface.co/), vis
 You'll also need to create an account on [NFT.Storage](https://nft.storage/), and create a new API key.
 
 ### 4.Deploy NFT contract
-In a separate terminal execute:
+In a separate terminal execute:  
 `$ cd cd contract/nft/
  $ sui client publish --gas-budget 100000000 `
 Get the 'package_id' of contract from the log of deployment:
-You'll find the "Transaction Effects" log below,the named 'ID' and 'Owner: Immutable' just is 'package_id'
+You'll find the "Transaction Effects" log below,the named 'ID' and 'Owner: Immutable' just is 'package_id' 
+```
 ----- Transaction Effects ----
 Status : Success
 Created Objects:
@@ -42,7 +43,7 @@ Created Objects:
 - ID: 0xb636701b4ebf375faf1343b87137c5e71bdd8f4b476835c2084138721f677404 , Owner: Account Address ( 0x5cca2192331ca9db87a6adfc756f809150aad3f8a2bf7eb3b68dd46ea03989f7 )
   Mutated Objects:
 - ID: 0x6eba3e64d49bf2c4e5861d60fbdabd569848db18e9cc43336fb41c967ef2b8e1 , Owner: Account Address ( 0x5cca2192331ca9db87a6adfc756f809150aad3f8a2bf7eb3b68dd46ea03989f7 )
-
+```
 ### 4.Configurate 'package_id' in './constants/NFT.json' file
 - **PACKAGE_ID=""**
 
